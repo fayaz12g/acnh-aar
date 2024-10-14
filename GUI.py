@@ -38,15 +38,15 @@ from video import *
 #### Create Window ####
 #######################
 
-tool_version = "1.1.1"
+tool_version = "1.0.0"
 
 root = customtkinter.CTk()
-root.title(f"Fayaz's Settings {tool_version} for Echoes of Wisdom")
+root.title(f"Fayaz's Settings {tool_version} for Animal Crossing New Horizons")
 root.geometry("540x760")
 
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("blue")  
-windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Fayaz's Echoes of Wisdom Utility {tool_version}")
+windowtitle = customtkinter.CTkLabel(master=root, font=(CTkFont, 20), text="Fayaz's Animal Crossing New Horizons Utility {tool_version}")
 
 ###############################################
 ###########    GLOBAL SETTINGS      ###########
@@ -258,7 +258,7 @@ def select_mario_folder():
     ratio_value = (int(numerator_entry.get()) / int(denominator_entry.get()))
     scaling_factor = (16/9) / (int(numerator_entry.get()) / int(denominator_entry.get()))
     username = getpass.getuser()
-    gameid = "01008cf01baac000"
+    gameid = "01006F8002326000"
     if output_yuzu.get() is True:
         input_folder = f"C:/Users/{username}/AppData/Roaming/yuzu/load/{gameid}"
         process_name = "yuzu.exe"
@@ -380,10 +380,10 @@ def pack_widgets():
     aspect_ratio_divider.pack(side="left")
     denominator_entry.pack(side="left")
     
-    DOF_checkbox.pack(padx=5, pady=5)
-    lod_checkbox.pack(padx=5, pady=5)
-    cutscene_checkbox.pack(padx=5, pady=5)
-    shadow_checkbox.pack(padx=10, pady=10)
+    # DOF_checkbox.pack(padx=5, pady=5)
+    # lod_checkbox.pack(padx=5, pady=5)
+    # cutscene_checkbox.pack(padx=5, pady=5)
+    # shadow_checkbox.pack(padx=10, pady=10)
     
     content_frame.pack(padx=10, pady=10)
 
@@ -425,10 +425,10 @@ def forget_packing():
     aspect_ratio_divider.pack_forget()
     denominator_entry.pack_forget()
     
-    DOF_checkbox.pack_forget()
-    lod_checkbox.pack_forget()
-    shadow_checkbox.pack_forget()
-    cutscene_checkbox.pack_forget()
+    # DOF_checkbox.pack_forget()
+    # lod_checkbox.pack_forget()
+    # shadow_checkbox.pack_forget()
+    # cutscene_checkbox.pack_forget()
 
     content_frame.pack_forget()
 
@@ -552,7 +552,7 @@ notebook.add("Credits")
 
 credits_label = ClickableLabel(master=notebook.tab("Credits"), text=
                     ('Utility created by fayaz\n'
-                     'https://github.com/fayaz12g/eow-aar\n'
+                     'https://github.com/fayaz12g/acnh-aar\n'
                      'ko-fi.com/fayaz12\n'
                      '\n\nWith thanks to\n'
                      'fruithapje21\n'

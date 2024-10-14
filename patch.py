@@ -8,7 +8,7 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
     scaling_factor = float(scaling_factor)
     ratio_value = float(ratio_value)
     print(f"The scaling factor is {scaling_factor}.")
-    hex_value1, hex_value2= eow_hex23(ratio_value)
+    hex_value1, hex_value2= acnh_hex23(ratio_value)
     version_variables = ["1.0.1"]
     for version_variable in version_variables:
         file_name = f"main-{version_variable}.pchtxt"
@@ -26,13 +26,19 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
 @flag offset_shift 0x100
 
 @enabled
+
+02c768e0 1c03a852
+02c768e4 dc719c72
+02c768e8 8003271e
+00ef5c40 e003271e
+
 00348b6c {hex_value1}
 00348b70 {hex_value2}
 @disabled
 
 {visual_fix}
 
-// Generated using EOW-AAR by Fayaz (github.com/fayaz12g/eow-aar)
+// Generated using acnh-AAR by Fayaz (github.com/fayaz12g/acnh-aar)
 // Made possible by Fl4sh_#9174'''
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, 'w') as patch_file:
