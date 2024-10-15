@@ -370,7 +370,7 @@ def select_mario_folder():
                 parent_folder = os.path.dirname(root)
                 new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".arc")
                 pack_folder_to_blarc(root, new_blarc_file)  # Function to pack folder to .arc
-                shutil.rmtree(parent_folder)  # Remove the folder after packing
+                shutil.rmtree(root)  # Remove the folder after packing
 
         print("Repacking new .Nin_NX_NVN.zs files. This step may take a while longer.")
         for root, _, files in os.walk(romfs_folder):
@@ -380,7 +380,7 @@ def select_mario_folder():
                     parent_folder = os.path.dirname(root)
                     new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".Nin_NX_NVN")
                     pack_folder_to_blarc(root, new_blarc_file)  # Pack to .Nin_NX_NVN
-                    os.remove(arc_file_path)  # Remove the .arc file after packing
+                    os.remove(root)  # Remove the .arc file root
                     compress_zstd(new_blarc_file)
                     os.remove(new_blarc_file)  # Remove the .Nin_NX_NVN file after packing
 
