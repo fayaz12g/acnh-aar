@@ -23,14 +23,14 @@ def asm_to_hex(asm_code):
     encoding, count = ks.asm(asm_code)
     return ''.join('{:02x}'.format(x) for x in encoding)
 
-def eow_hex23(num):
+def acnh_hex23(num):
     num = round(num, 15)
     packed = struct.pack('!f', num)
     full_hex = ''.join('{:02x}'.format(b) for b in packed)
     hex_1 = full_hex[:4]
     hex_2 = full_hex[4:]
-    asm_1 = f"movz w9, #0x{hex_2}"
-    asm_2 = f"movk w9, #0x{hex_1}, lsl #16"
+    asm_1 = f"mov w28, #0x4018{hex_1}0000"
+    asm_2 = f"movk w28, #0x{hex_2}"
     hex_value1 = asm_to_hex(asm_1)
     hex_value2 = asm_to_hex(asm_2)
     return hex_value1, hex_value2

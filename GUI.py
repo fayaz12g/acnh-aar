@@ -296,7 +296,7 @@ def select_mario_folder():
     ##################
     
     if do_video.get():
-        output_folder = os.path.join(romfs_folder, "region_common", "movie")
+        output_folder = os.path.join(romfs_folder, "Movie")
         # download_video_files(text_folder)
         process_videos_in_folder(str(scaling_factor), output_folder)
 
@@ -320,8 +320,16 @@ def select_mario_folder():
         create_patch_files(patch_folder, str(ratio_value), str(scaling_factor), visual_fixes)
 
         ####################
-        # BLARC Extraction #
+        # ZS/ARC Extraction #
         ####################
+
+        for root, _, files in os.walk(romfs_folder):
+            for file in files:
+                if file.lower().endswith(".zs"):
+                    file_path = os.path.join(root, file)
+                    print(f"Extracting {file}.")
+                    extract_blarc(file_path)
+                    os.remove(file_path)
 
         for root, _, files in os.walk(romfs_folder):
             for file in files:
@@ -341,8 +349,8 @@ def select_mario_folder():
         ##########################
         # Cleaning and Repacking #
         ##########################
-        
-        print("Repacking new blarc files. This step may take about 10 seconds")
+
+        print("Repacking new arc files. This step may take about 10 seconds")
         for root, dirs, _ in os.walk(romfs_folder):
             if "blyt" in dirs:
                 parent_folder = os.path.dirname(root)

@@ -6,17 +6,17 @@ import getpass
 
 def download_extract_copy(input_folder, mod_name):
     username = getpass.getuser()
-    directory_path = f"C:/Users/{username}/AppData/Roaming/AnyAspectRatio/perm/eow"
+    directory_path = f"C:/Users/{username}/AppData/Roaming/AnyAspectRatio/perm/acnh"
 
     zip_urls = [
-        ("https://github.com/fayaz12g/aar-files/raw/main/eow/echoes.zip", "echoes.zip")
+        ("https://github.com/fayaz12g/aar-files/raw/main/acnh/horizons.zip", "horizons.zip")
     ]
 
     # Check if the directory exists, create if it doesn't
     os.makedirs(directory_path, exist_ok=True)
 
     # Define the final extraction folder path
-    extract_folder = os.path.join(input_folder, mod_name, "romfs", "region_common", "ui")
+    extract_folder = os.path.join(input_folder, mod_name, "romfs", "Layout")
 
     # Remove the existing destination folder if it exists
     if os.path.exists(extract_folder):
