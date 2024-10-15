@@ -15,4 +15,3 @@ def compress_zstd(input_file):
     compressed_filename = os.path.basename(output_file)
 
     print(f"Compressed {compressed_filename}")
-

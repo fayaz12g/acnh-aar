@@ -328,7 +328,7 @@ def select_mario_folder():
                 if file.lower().endswith(".zs"):
                     file_path = os.path.join(root, file)
                     print(f"Extracting {file}.")
-                    extract_blarc(file_path)
+                    decompress_zstd(file_path)
                     os.remove(file_path)
 
         for root, _, files in os.walk(romfs_folder):
@@ -360,11 +360,12 @@ def select_mario_folder():
 
         print("Repacking new zs files. This step may take about 10 seconds")
         for root, dirs, _ in os.walk(romfs_folder):
-            if root == "Layout":
+            # Check if the current root directory is named "Layout"
+            if os.path.basename(root) == "Layout":
                 parent_folder = os.path.dirname(root)
                 new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".zs")
-                pack_folder_to_blarc(root, new_blarc_file)
-                shutil.rmtree(root) 
+                compress_zstd(root)  # Compress the "Layout" folder
+                shutil.rmtree(root)  # Remove the "Layout" folder after compression
 
     ##########################
     #          Finish        #
