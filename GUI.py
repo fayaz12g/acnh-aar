@@ -323,6 +323,8 @@ def select_mario_folder():
         # ZS/ARC Extraction #
         ####################
 
+        # ZS Extraction
+        print("Extracting ZS files.")
         for root, _, files in os.walk(romfs_folder):
             for file in files:
                 if file.lower().endswith(".zs"):
@@ -331,6 +333,18 @@ def select_mario_folder():
                     decompress_zstd(file_path)
                     os.remove(file_path)
 
+        # Nin_NX_NVN Extraction
+        print("Extracting Nin_NX_NVN files.")
+        for root, _, files in os.walk(romfs_folder):
+            for file in files:
+                if file.lower().endswith(".nin_nx_nvn"):
+                    file_path = os.path.join(root, file)
+                    print(f"Extracting {file}.")
+                    extract_blarc(file_path)
+                    os.remove(file_path)
+
+        #ARC Extraction
+        print("Extracting ARC files.")
         for root, _, files in os.walk(romfs_folder):
             for file in files:
                 if file.lower().endswith(".arc"):
@@ -350,22 +364,26 @@ def select_mario_folder():
         # Cleaning and Repacking #
         ##########################
 
-        print("Repacking new arc files. This step may take about 10 seconds")
+        print("Repacking new .arc files. This step may take a while.")
         for root, dirs, _ in os.walk(romfs_folder):
-            if "blyt" in dirs:
+            if "blyt" in dirs:  # Check if the folder contains a "blyt" directory
                 parent_folder = os.path.dirname(root)
                 new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".arc")
-                pack_folder_to_blarc(root, new_blarc_file)
-                shutil.rmtree(root) 
+                pack_folder_to_blarc(root, new_blarc_file)  # Function to pack folder to .arc
+                shutil.rmtree(parent_folder)  # Remove the folder after packing
 
-        print("Repacking new zs files. This step may take about 10 seconds")
-        for root, dirs, _ in os.walk(romfs_folder):
-            # Check if the current root directory is named "Layout"
-            if os.path.basename(root) == "Layout":
-                parent_folder = os.path.dirname(root)
-                new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".zs")
-                compress_zstd(root)  # Compress the "Layout" folder
-                shutil.rmtree(root)  # Remove the "Layout" folder after compression
+        print("Repacking new .Nin_NX_NVN.zs files. This step may take a while longer.")
+        for root, _, files in os.walk(romfs_folder):
+            for file in files:
+                if file.endswith(".arc"):  # Check if the folder contains an .arc file
+                    arc_file_path = os.path.join(root, file)
+                    parent_folder = os.path.dirname(root)
+                    new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".Nin_NX_NVN")
+                    pack_folder_to_blarc(root, new_blarc_file)  # Pack to .Nin_NX_NVN
+                    os.remove(arc_file_path)  # Remove the .arc file after packing
+                    compress_zstd(new_blarc_file)
+                    os.remove(new_blarc_file)  # Remove the .Nin_NX_NVN file after packing
+
 
     ##########################
     #          Finish        #

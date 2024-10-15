@@ -14,4 +14,4 @@ def decompress_zstd(input_file):
 
     decompressed_filename = os.path.basename(output_file)
 
-    print(f"Decompressed {decompressed_filename}")
+    # print(f"Decompressed {decompressed_filename}")
