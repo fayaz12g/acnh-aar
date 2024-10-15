@@ -9,13 +9,13 @@ def create_patch_files(patch_folder, ratio_value, scaling_factor, visual_fixes):
     ratio_value = float(ratio_value)
     print(f"The scaling factor is {scaling_factor}.")
     hex_value1, hex_value2= acnh_hex23(ratio_value)
-    version_variables = ["1.0.1"]
+    version_variables = ["2.0.6"]
     for version_variable in version_variables:
         file_name = f"main-{version_variable}.pchtxt"
         file_path = os.path.join(patch_folder, file_name)
 
-        if version_variable == "1.0.1":
-            nsobidid = "09A15C8259828A41B91B036B12F0687973A4627A"
+        if version_variable == "2.0.6":
+            nsobidid = "15765149DF53BA4105C75A3A1A5102FC"
             replace1 = "0045fd90"
             replace2 = "0045fd94"
             visual_fix = visual_fixesa
