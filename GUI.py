@@ -358,6 +358,14 @@ def select_mario_folder():
                 pack_folder_to_blarc(root, new_blarc_file)
                 shutil.rmtree(root) 
 
+        print("Repacking new zs files. This step may take about 10 seconds")
+        for root, dirs, _ in os.walk(romfs_folder):
+            if root == "Layout":
+                parent_folder = os.path.dirname(root)
+                new_blarc_file = os.path.join(parent_folder, os.path.basename(root) + ".zs")
+                pack_folder_to_blarc(root, new_blarc_file)
+                shutil.rmtree(root) 
+
     ##########################
     #          Finish        #
     ##########################

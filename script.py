@@ -11,47 +11,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder, cutscene_zoomed):
     file_paths = {}
 
     layout_map = {
-                    'Throbber': ['A_Save_00'],
-                    'Counter': ['L_Cost_00'],
-                    'CountCost': ['P_Base_00', 'L_Cost_00'],
-                    'HeartGaugeList': ['N_Life_00'],
-                    'SetSlotUseItem': ['L_SetItem_00'],
-                    'SystemMenu': ['N_List_00', 'L_ControllerKeyConfig_00'],
-                    'MapMenu': ['L_Item_00'],
-                    'KeyItem': ['N_Key_00'],
-                    'BuffTimer': ['L_BuffDescription_00'],
-                    'SetSlotPasteActor': ['L_CopySetItem_00'],
-                    'LinkGauge': ['N_InOut_00'],
-                    'PartnerGauge': ['N_Offset_00', 'W_window_02'],
-                    'L_PasteActorSelectList': ['P_pict_01', 'P_pict_00'],
-                    'LocationInfoField': ['N_InOut_00'],
-                    'L_MachineSelectList': ['P_pict_01', 'P_pict_00'],
-                    'WorldGlobePieceSensor': ['N_Sensor_00'],
-                    'MiniGameQuitHelp': ['N_Interact_00', 'L_Interact_00'],
-                    'CollectMenu': ['N_ZeldaLinkItem_00', 'L_Item_21', 'N_Proof_00', 'N_StampCard_00', 'N_Bottle_00', 'N_PartnerLevel_00', 'L_BtnChoice_00'],
-                    'MapFilter': ['N_InOut_00'],
-                    'SetSlotLink': ['L_SetItem_00', 'L_SetItem_01', 'L_SetItem_02'],
-                    'FooterHelp': ['N_Interact_00'],
-                    'QuestUpdate': ['N_InOut_00'],
-                    'DressUp': ['N_PageInOut_00', 'N_null_00'],
-                    'SmoothieBgFront': ['SmoothieFruitsSide_00', 'SmoothieFruitsSide_01', 'SmoothieFruits_00', 'SmoothieFruits_01'],
-                    'SubQuestInformation': ['N_QuestComplete_00'],
-                    'QuestInformation': ['N_QuestComplete_00'],
-                    'SmoothieChoose': ['N_Preview_01', 'N_Title_00', 'N_ListPosition_00'],
-                    'SmoothieMenu': ['N_List_00', 'N_Select_00'],
-                    'Operate': ['N_InOut_00'],
-                    'MessageWindowGuide': ['N_DecideOut_00'],
-                    'MessageWindow': ['A_Choice_00'],
-                    'MessageWindowShop': ['A_Choice_00'],
-                    'RecipeMenu': ['N_Title_00', 'N_ListPosition_00', 'N_Preview_00'],
-                    'LinkItemMenu': ['A_Rupee_00'],
-                    'Title': ['N_InOut_00'],
-                    'SubMenuHeader': ['N_Header_00', 'N_Footer_00', 'N_CategoryList_00'],
-                    'MenuHeader':['N_Header_00', 'N_Footer_00', 'N_CategoryList_00'],
-                    'MapPopUp':['N_Offset_00'],
-                    'Option':['N_Description_00', 'A_List_00'],
-                    'DictionaryList':['N_PageInOut_00', 'L_Scrollbar_00', 'L_Scrollbar_00', 'L_SortInfo_00'],
-                    'GameOver':['N_DlgSel_00', 'A_alignment_00', 'T_GameOver_00'],
+                    # 'Throbber': ['A_Save_00'],
                 }
 
     def patch_ui_layouts(direction):
@@ -65,7 +25,7 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder, cutscene_zoomed):
             paths = file_paths.get(modified_name, [])
             
             if not paths:
-                default_path = os.path.join(unpacked_folder, "region_common", "ui", "GameMain", "blyt", f"{filename}.bflyt")
+                default_path = os.path.join(unpacked_folder, "Layout", f"{filename}.bflyt")
                 paths.append(default_path)
             
             for full_path_of_file in paths:
@@ -154,13 +114,9 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder, cutscene_zoomed):
             
     blyt_folder = os.path.abspath(os.path.join(unpacked_folder))
     
-    do_not_scale_rootpane = ["Fade", "ScreenCapture", "FrontBlindScreen", "ScreenMainMenu", "ScreenSubMenu", "StaffRoll", "SmoothieBg", "BlindScreen"]
+    do_not_scale_rootpane = []
    
     rootpane_by_y = []
-
-    if cutscene_zoomed:
-        rootpane_by_y = rootpane_by_y + ["Movie"]
-        do_not_scale_rootpane = do_not_scale_rootpane + ["Movie"]
 
     # Initialize a dictionary to store lists of paths
     file_paths = {}
@@ -209,33 +165,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder, cutscene_zoomed):
                 patch_blyt(name, 'RootPane', 'scale_y', 1/s1)
                 patch_blyt(name, 'RootPane', 'scale_x', 1)
 
-        patch_blyt('SubMenuHeader', 'N_Header_00', 'scale_x', 1/s1)
-        patch_blyt('SubMenuHeader', 'N_Footer_00', 'scale_x', 1/s1)
-        patch_blyt('MenuHeader', 'P_pict_04', 'scale_x', 1/s1)
-        patch_blyt('MenuHeader', 'N_Header_00', 'scale_x', 1/s1)
-        patch_blyt('MenuHeader', 'N_Footer_00', 'scale_x', 1/s1)
-        patch_blyt('ScreenCapture', 'RootPane', 'scale_x', 1/s1)
-
-        patch_blyt('L_CommonModal', 'P_footer_00', 'scale_x', 1/s1)
-        patch_blyt('L_CommonModal', 'N_Win_00', 'scale_x', 1/s1)
-        patch_blyt('L_CommonModal', 'S_Graphic_00', 'scale_x', 1/s1)
-
-        patch_blyt('SmoothieBgFront', 'W_FootSdw_00', 'scale_x', 1/s1)
-
-        patch_blyt('MapMenu', 'L_SubHeaderLine_00', 'scale_x', 1/s1)
-
-        patch_blyt('ScreenMainMenu', 'RootPane', 'scale_x', 1/s1)
-
-        patch_blyt('GameOver', 'P_DisplaySub_00', 'scale_x', 1/s1)
-        patch_blyt('GameOver', 'P_DisplayAdd_01', 'scale_x', 1/s1)
-
-
-        patch_blyt('ActorCostDown', 'N_Blur_00', 'scale_x', 1/s1)
-        patch_blyt('ActorCostDown', 'P_DisplyMask_00', 'scale_x', 1/s1)
-        patch_blyt('ActorCostDown', 'N_Loop_00', 'scale_x', 1/s1)
-
-        patch_blyt('ActorSelect', 'P_Pattern_02', 'scale_x', 1/s1)    
-        patch_blyt('ActorSelect', 'P_Pattern_03', 'scale_x', 1/s1)
+        
+        # patch_blyt('ActorSelect', 'P_Pattern_03', 'scale_x', 1/s1)
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
@@ -256,25 +187,8 @@ def patch_blarc(aspect_ratio, HUD_pos, unpacked_folder, cutscene_zoomed):
                 print(f"Scaling root pane vertically for {name}")
                 patch_blyt(name, 'RootPane', 'scale_y', s1)
              
-        patch_blyt('SubMenuHeader', 'N_Header_00', 'scale_y', 1/s1)
-        patch_blyt('SubMenuHeader', 'N_Footer_00', 'scale_y', 1/s1)
-        patch_blyt('MenuHeader', 'P_pict_04', 'scale_y', 1/s1)
-        patch_blyt('MenuHeader', 'N_Header_00', 'scale_y', 1/s1)
-        patch_blyt('MenuHeader', 'N_Footer_00', 'scale_y', 1/s1)
-        patch_blyt('ScreenCapture', 'RootPane', 'scale_y', 1/s1)
-
-        patch_blyt('L_CommonModal', 'P_footer_00', 'scale_y', 1/s1)
-        patch_blyt('L_CommonModal', 'N_Win_00', 'scale_y', 1/s1)
-        patch_blyt('L_CommonModal', 'S_Graphic_00', 'scale_y', 1/s1)
-
-        patch_blyt('SmoothieBgFront', 'W_FootSdw_00', 'scale_y', 1/s1)
-
-        patch_blyt('MapMenu', 'L_SubHeaderLine_00', 'scale_y', 1/s1)
-
-        patch_blyt('ScreenMainMenu', 'RootPane', 'scale_y', 1/s1)
-
-        patch_blyt('GameOver', 'P_DisplaySub_00', 'scale_y', 1/s1)
-        patch_blyt('GameOver', 'P_DisplayAdd_01', 'scale_y', 1/s1)
+        
+        # patch_blyt('GameOver', 'P_DisplayAdd_01', 'scale_y', 1/s1)
 
         if HUD_pos == 'corner':
             print("Shifitng elements for corner HUD")
