@@ -29,7 +29,7 @@ def acnh_hex23(num):
     full_hex = ''.join('{:02x}'.format(b) for b in packed)
     hex_1 = full_hex[:4]
     hex_2 = full_hex[4:]
-    asm_1 = f"mov w28, #0x4018{hex_1}0000"
+    asm_1 = f"mov w28, #0x{hex_1}0000"
     asm_2 = f"movk w28, #0x{hex_2}"
     hex_value1 = asm_to_hex(asm_1)
     hex_value2 = asm_to_hex(asm_2)
